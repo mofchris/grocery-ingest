@@ -52,7 +52,7 @@ export async function getApiDeltaPage(options: ApiPageOptions): Promise<ApiPageR
   let reachedCursor = false;
   const records = rows.filter((row) => {
     const date = publicationDate(row);
-    if (options.cursor && date && date <= options.cursor) {
+    if (options.cursor && date && date < options.cursor) {
       reachedCursor = true;
       return false;
     }
@@ -66,6 +66,30 @@ export async function getApiDeltaPage(options: ApiPageOptions): Promise<ApiPageR
     newestCursor: dates[0] ?? null,
     remaining: rawRemaining !== null && Number.isFinite(Number(rawRemaining)) ? Number(rawRemaining) : null,
   };
+}
+
+const DETAILS_URL = 'https://api.nal.usda.gov/fdc/v1/foods';
+
+// The list endpoint returns an abridged record (no ingredients, brand name, category or serving
+// size). Hashing that would mark every product "changed" and blank those fields, so the list is
+// used only to discover what was published since the cursor; full records come from /foods.
+export async function getFullRecords(
+  fdcIds: number[],
+  apiKey: string,
+  fetchImpl: typeof fetch = fetch,
+): Promise<RawFood[]> {
+  const output: RawFood[] = [];
+  for (let offset = 0; offset < fdcIds.length; offset += 20) {
+    const url = new URL(DETAILS_URL);
+    url.search = new URLSearchParams({
+      api_key: apiKey, format: 'full', fdcIds: fdcIds.slice(offset, offset + 20).join(','),
+    }).toString();
+    const response = await fetchImpl(url, { headers: { 'User-Agent': config.userAgent, Accept: 'application/json' } });
+    if (!response.ok) throw new HttpStatusError(response.status, `FDC API details failed: HTTP ${response.status}`);
+    const body: unknown = await response.json();
+    if (Array.isArray(body)) output.push(...body.filter((row): row is RawFood => Boolean(row && typeof row === 'object')));
+  }
+  return output;
 }
 
 export async function processApiDeltaPage(
@@ -91,7 +115,9 @@ export async function processApiDeltaPage(
       return;
     }
     let failed = 0;
-    const products = page.records.flatMap((raw) => {
+    const ids = page.records.map((raw) => Number(raw.fdcId)).filter(Number.isFinite);
+    const full = await getFullRecords(ids, config.fdcApiKey);
+    const products = full.flatMap((raw) => {
       try { return [normalizeProduct(raw)]; } catch { failed++; return []; }
     });
     await stageProducts(pool, runId, products);

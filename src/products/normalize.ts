@@ -12,6 +12,15 @@ function number(value: unknown): number | null {
   return null;
 }
 
+// Bulk files use MM/DD/YYYY, the API uses YYYY-MM-DD. Store ISO so Postgres and string compares agree.
+export function isoDate(value: unknown): string | null {
+  const raw = text(value);
+  if (!raw) return null;
+  const us = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(raw);
+  if (us) return `${us[3]}-${us[1]!.padStart(2, '0')}-${us[2]!.padStart(2, '0')}`;
+  return /^\d{4}-\d{2}-\d{2}/.test(raw) ? raw.slice(0, 10) : null;
+}
+
 export function normalizeGtin(value: unknown): string | null {
   const raw = text(value);
   if (!raw) return null;
@@ -68,8 +77,8 @@ export function normalizeProduct(raw: RawFood): NormalizedProduct {
     servingSizeUnit: text(raw.servingSizeUnit),
     householdServingFullText: text(raw.householdServingFullText),
     nutrients: normalizeNutrients(raw.foodNutrients),
-    publicationDate: text(raw.publicationDate),
-    modifiedDate: text(raw.modifiedDate ?? raw.availableDate),
+    publicationDate: isoDate(raw.publicationDate),
+    modifiedDate: isoDate(raw.modifiedDate ?? raw.availableDate),
   };
 }
 

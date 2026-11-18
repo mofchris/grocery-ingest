@@ -38,3 +38,10 @@ test('normalizeProduct maps bulk nutrient and branded food fields', () => {
   ]);
 });
 
+
+test('isoDate converts bulk MM/DD/YYYY and keeps API ISO dates', async () => {
+  const { isoDate } = await import('../src/products/normalize.ts');
+  assert.equal(isoDate('11/13/2020'), '2020-11-13');
+  assert.equal(isoDate('2026-10-22'), '2026-10-22');
+  assert.equal(isoDate('not a date'), null);
+});

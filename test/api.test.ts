@@ -4,6 +4,7 @@ import test from 'node:test';
 import { getApiDeltaPage } from '../src/sources/api.ts';
 import { HttpStatusError } from '../src/sources/snapshot.ts';
 
+// Records published on the cursor day are re-fetched on purpose; content hashing skips them if unchanged.
 test('getApiDeltaPage stops at the publication cursor', async () => {
   let calls = 0;
   const fetchImpl: typeof fetch = async () => {
@@ -14,7 +15,7 @@ test('getApiDeltaPage stops at the publication cursor', async () => {
       { fdcId: 1, publicationDate: '2025-01-01' },
     ]), { status: 200, headers: { 'content-type': 'application/json', 'x-ratelimit-remaining': '7' } });
   };
-  const result = await getApiDeltaPage({ apiKey: 'test-key', pageNumber: 1, cursor: '2025-01-01', fetchImpl });
+  const result = await getApiDeltaPage({ apiKey: 'test-key', pageNumber: 1, cursor: '2025-02-01', fetchImpl });
   assert.equal(result.status, 'ok');
   if (result.status !== 'ok') return;
   assert.deepEqual(result.records.map((row) => row.fdcId), [3, 2]);

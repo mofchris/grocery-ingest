@@ -9,7 +9,7 @@ export async function testPool(t: TestContext): Promise<import('pg').Pool | null
     return null;
   }
   const pool = new pg.Pool({
-    connectionString: process.env.DATABASE_URL ?? 'postgres://postgres@localhost:5433/grocery',
+    connectionString: process.env.TEST_DATABASE_URL ?? 'postgres://postgres@localhost:5433/grocery_test',
     connectionTimeoutMillis: 500,
   });
   try {
