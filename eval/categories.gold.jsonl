@@ -1,2 +1,82 @@
-{"_meta":"NOT YET GENERATED — requires real USDA snapshot inspection; no category strings or labels have been fabricated"}
-
+{"raw": "Candy", "aisle": "Candy & Sweets"}
+{"raw": "Popcorn, Peanuts, Seeds & Related Snacks", "aisle": "Snacks"}
+{"raw": "Cheese", "aisle": "Dairy & Eggs"}
+{"raw": "Ice Cream & Frozen Yogurt", "aisle": "Frozen"}
+{"raw": "Cookies & Biscuits", "aisle": "Bakery"}
+{"raw": "Chips, Pretzels & Snacks", "aisle": "Snacks"}
+{"raw": "Chocolate", "aisle": "Candy & Sweets"}
+{"raw": "Breads & Buns", "aisle": "Bakery"}
+{"raw": "Pickles, Olives, Peppers & Relishes", "aisle": "Canned & Jarred"}
+{"raw": "Cakes, Cupcakes, Snack Cakes", "aisle": "Bakery"}
+{"raw": "Fruit & Vegetable Juice, Nectars & Fruit Drinks", "aisle": "Beverages"}
+{"raw": "Seasoning Mixes, Salts, Marinades & Tenderizers", "aisle": "Pantry Staples"}
+{"raw": "Snack, Energy & Granola Bars", "aisle": "Snacks"}
+{"raw": "Soda", "aisle": "Beverages"}
+{"raw": "Cereal", "aisle": "Breakfast & Cereal"}
+{"raw": "Dips & Salsa", "aisle": "Condiments & Sauces"}
+{"raw": "Ketchup, Mustard, BBQ & Cheese Sauce", "aisle": "Condiments & Sauces"}
+{"raw": "Pasta by Shape & Type", "aisle": "Pasta & Noodles"}
+{"raw": "Pre-Packaged Fruit & Vegetables", "aisle": "Produce"}
+{"raw": "Yogurt", "aisle": "Dairy & Eggs"}
+{"raw": "Salad Dressing & Mayonnaise", "aisle": "Condiments & Sauces"}
+{"raw": "Water", "aisle": "Beverages"}
+{"raw": "Frozen Dinners & Entrees", "aisle": "Frozen"}
+{"raw": "Pepperoni, Salami & Cold Cuts", "aisle": "Deli & Prepared"}
+{"raw": "Sausages, Hotdogs & Brats", "aisle": "Meat & Seafood"}
+{"raw": "Vegetable & Cooking Oils", "aisle": "Pantry Staples"}
+{"raw": "Milk", "aisle": "Dairy & Eggs"}
+{"raw": "Powdered Drinks", "aisle": "Beverages"}
+{"raw": "Canned Vegetables", "aisle": "Canned & Jarred"}
+{"raw": "Crackers & Biscotti", "aisle": "Snacks"}
+{"raw": "Baking Decorations & Dessert Toppings", "aisle": "Baking"}
+{"raw": "Frozen Fish & Seafood", "aisle": "Frozen"}
+{"raw": "Prepared Pasta & Pizza Sauces", "aisle": "Condiments & Sauces"}
+{"raw": "Oriental, Mexican & Ethnic Sauces", "aisle": "International"}
+{"raw": "Jam, Jelly & Fruit Spreads", "aisle": "Pantry Staples"}
+{"raw": "Cake, Cookie & Cupcake Mixes", "aisle": "Baking"}
+{"raw": "Canned Fruit", "aisle": "Canned & Jarred"}
+{"raw": "Canned & Bottled Beans", "aisle": "Canned & Jarred"}
+{"raw": "Croissants, Sweet Rolls, Muffins & Other Pastries", "aisle": "Bakery"}
+{"raw": "Nut & Seed Butters", "aisle": "Pantry Staples"}
+{"raw": "Milk/Milk Substitutes", "aisle": "Dairy & Eggs"}
+{"raw": "Herbs & Spices", "aisle": "Pantry Staples"}
+{"raw": "Canned Soup", "aisle": "Canned & Jarred"}
+{"raw": "Iced & Bottle Tea", "aisle": "Beverages"}
+{"raw": "Energy, Protein & Muscle Recovery Drinks", "aisle": "Beverages"}
+{"raw": "Syrups & Molasses", "aisle": "Pantry Staples"}
+{"raw": "Rice", "aisle": "Pantry Staples"}
+{"raw": "Granulated, Brown & Powdered Sugar", "aisle": "Baking"}
+{"raw": "Chewing Gum & Mints", "aisle": "Candy & Sweets"}
+{"raw": "Butter & Spread", "aisle": "Dairy & Eggs"}
+{"raw": "Mexican Dinner Mixes", "aisle": "International"}
+{"raw": "Tea Bags", "aisle": "Beverages"}
+{"raw": "Honey", "aisle": "Pantry Staples"}
+{"raw": "Flours & Corn Meal", "aisle": "Baking"}
+{"raw": "Canned Seafood", "aisle": "Canned & Jarred"}
+{"raw": "Plant Based Milk", "aisle": "Dairy & Eggs"}
+{"raw": "Frozen Patties and Burgers", "aisle": "Frozen"}
+{"raw": "Alcohol", "aisle": "Alcohol"}
+{"raw": "Prepared Subs & Sandwiches", "aisle": "Deli & Prepared"}
+{"raw": "Eggs & Egg Substitutes", "aisle": "Dairy & Eggs"}
+{"raw": "Frozen Pancakes, Waffles, French Toast & Crepes", "aisle": "Frozen"}
+{"raw": "Liquid Water Enhancer", "aisle": "Beverages"}
+{"raw": "Sport Drinks", "aisle": "Beverages"}
+{"raw": "Sushi", "aisle": "Deli & Prepared"}
+{"raw": "Coffee", "aisle": "Beverages"}
+{"raw": "Poultry, Chicken & Turkey", "aisle": "Meat & Seafood"}
+{"raw": "Meal Replacement Supplements", "aisle": "Health & Supplements"}
+{"raw": "Baby/Infant  Foods/Beverages", "aisle": "Baby"}
+{"raw": "Pancakes, Waffles, French Toast & Crepes", "aisle": "Breakfast & Cereal"}
+{"raw": "Chips/Crisps/Snack Mixes - Natural/Extruded (Shelf Stable)", "aisle": "Snacks"}
+{"raw": "Cereal/Muesli Bars", "aisle": "Snacks"}
+{"raw": "Oils Edible", "aisle": "Pantry Staples"}
+{"raw": "Ice-Cream Take Home", "aisle": "Frozen"}
+{"raw": "Vitamins", "aisle": "Health & Supplements"}
+{"raw": "Oral Hygiene Products", "aisle": "Personal Care"}
+{"raw": "Gardening", "aisle": "Other"}
+{"raw": "Media", "aisle": "Other"}
+{"raw": "Infant Formula", "aisle": "Baby"}
+{"raw": "Tofu", "aisle": "Produce"}
+{"raw": "Margarine/Butter", "aisle": "Dairy & Eggs"}
+{"raw": "All Noodles", "aisle": "Pasta & Noodles"}
+{"raw": "Gelatin, Gels, Pectins & Desserts", "aisle": "Baking"}
