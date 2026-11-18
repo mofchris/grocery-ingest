@@ -28,7 +28,7 @@ export function startDatabase(): void {
 export function initDatabase(): void {
   mkdirSync(dirname(config.pgDataDir), { recursive: true });
   if (!existsSync(join(config.pgDataDir, 'PG_VERSION'))) {
-    run('initdb', ['-A', 'trust', '-U', 'postgres', '-D', config.pgDataDir]);
+    run('initdb', ['-A', 'trust', '-U', 'postgres', '-E', 'UTF8', '--no-locale', '-D', config.pgDataDir]);
   }
   startDatabase();
   const exists = run('psql', ['-h', 'localhost', '-p', '5433', '-U', 'postgres', '-d', 'postgres', '-tAc', "SELECT 1 FROM pg_database WHERE datname='grocery'"]);

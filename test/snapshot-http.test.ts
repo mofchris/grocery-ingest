@@ -60,3 +60,36 @@ test('downloadSnapshot replaces an existing cache file after a changed 200 respo
   assert.equal(result.status, 'downloaded');
   assert.equal(await readFile(destination, 'utf8'), 'new bytes');
 });
+
+// Mirrors the real USDA setup: two load-balanced nginx backends, same bytes, different ETags.
+test('downloadSnapshot sends every known ETag and reports a stable sha256 across backends', async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), 'grocery-ingest-etags-'));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  let backend = 0;
+  const server = createServer((request, response) => {
+    const etag = backend++ % 2 === 0 ? '"backend-a"' : '"backend-b"';
+    const sent = String(request.headers['if-none-match'] ?? '').split(',').map((value) => value.trim());
+    if (sent.includes(etag)) {
+      response.writeHead(304, { ETag: etag });
+      response.end();
+      return;
+    }
+    response.writeHead(200, { 'Content-Type': 'application/zip', ETag: etag });
+    response.end(Buffer.from('identical bytes'));
+  });
+  await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise<void>((resolve, reject) => server.close((error) => error ? reject(error) : resolve())));
+  const address = server.address();
+  assert.ok(address && typeof address === 'object');
+  const url = `http://127.0.0.1:${address.port}/snapshot.zip`;
+
+  const a = await downloadSnapshot(url, join(directory, 'snapshot.zip'));
+  const b = await downloadSnapshot(url, join(directory, 'snapshot.zip'), { knownEtags: [a.etag!] });
+  assert.equal(b.status, 'downloaded');
+  assert.notEqual(b.etag, a.etag);
+  assert.equal(b.sha256, a.sha256);
+  const third = await downloadSnapshot(url, join(directory, 'snapshot.zip'), { knownEtags: [a.etag!, b.etag!] });
+  const fourth = await downloadSnapshot(url, join(directory, 'snapshot.zip'), { knownEtags: [a.etag!, b.etag!] });
+  assert.equal(third.status, 'not_modified');
+  assert.equal(fourth.status, 'not_modified');
+});
