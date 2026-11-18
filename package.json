@@ -1,0 +1,38 @@
+{
+  "name": "grocery-ingest",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "db:init": "node src/cli.ts db:init",
+    "db:start": "node src/cli.ts db:start",
+    "db:stop": "node src/cli.ts db:stop",
+    "migrate": "node src/cli.ts migrate",
+    "sync": "node src/cli.ts sync",
+    "ingest": "node src/cli.ts ingest",
+    "worker": "node src/cli.ts worker",
+    "scheduler": "node src/cli.ts scheduler",
+    "categorize": "node src/cli.ts categorize",
+    "eval": "node src/cli.ts eval",
+    "report": "node src/cli.ts report",
+    "test": "node --test --test-concurrency=1 test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "check": "node tools/check.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.10.0",
+    "pg": "^8.23.1",
+    "stream-json": "^1.9.1",
+    "yauzl": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/pg": "^8.23.1",
+    "@types/stream-json": "^1.7.8",
+    "@types/yauzl": "^3.4.0",
+    "typescript": "^7.0.2"
+  }
+}
