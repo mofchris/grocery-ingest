@@ -35,8 +35,10 @@ export function formatRuns(rows: RunRow[]): string {
     '|---:|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|',
   );
   for (const row of rows) {
-    const seen = Number(row.records_seen);
-    const skip = seen > 0 ? `${((Number(row.records_unchanged) / seen) * 100).toFixed(1)}%` : '—';
+    // Skip rate is over distinct products merged in the run: a release repeats some GTINs, and
+    // those duplicates are collapsed before the merge, so records_seen is larger than that.
+    const merged = Number(row.records_new) + Number(row.records_changed) + Number(row.records_unchanged);
+    const skip = merged > 0 ? `${((Number(row.records_unchanged) / merged) * 100).toFixed(1)}%` : '—';
     lines.push(`| ${row.id} | ${row.started_at.toISOString()} | ${cell(row.source)} | ${cell(row.kind)} | ${cell(row.status)} | ${cell(row.http_status)} | ${row.bytes_downloaded} | ${row.records_seen} | ${row.records_new} | ${row.records_changed} | ${row.records_unchanged} | ${row.records_failed} | ${row.records_missing} | ${skip} | ${cell(row.duration_ms)} |`);
   }
   return `${lines.join('\n')}\n`;
